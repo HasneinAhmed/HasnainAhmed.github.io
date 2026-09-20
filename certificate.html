@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CERTIFICATIONS INDEX // HASNAIN . AHMED</title>
+    <style>
+        :root {
+            --bg-pitch: #050505;
+            --card-bg: rgba(14, 14, 16, 0.85);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --border-active: #ffffff;
+            --text-primary: #f1f1f1;
+            --text-secondary: #88888e;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-pitch);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            padding: 3rem 1.5rem;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .halftone-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+            background-size: 4px 4px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-back {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: 1px solid var(--border-light);
+            padding: 6px 14px;
+            margin-bottom: 3rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-back:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin: 3rem 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        /* --- CERTIFICATE CARDS GRID --- */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .cert-card:hover {
+            border-color: var(--border-active);
+            background: rgba(22, 22, 26, 0.95);
+            transform: translateY(-2px);
+        }
+
+        .cert-issuer {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-title {
+            font-size: 1rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .cert-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px dashed var(--border-light);
+            padding-top: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .cert-action {
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* --- SLIDE-OUT DRAWER STYLES --- */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 550px;
+            height: 100vh;
+            background: #09090b;
+            border-left: 1px solid var(--border-light);
+            z-index: 100;
+            padding: 2.5rem 2rem;
+            overflow-y: auto;
+            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .drawer.active {
+            right: 0;
+        }
+
+        .drawer-close {
+            align-self: flex-end;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .drawer-close:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .drawer-tag {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .drawer-title {
+            font-size: 1.3rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .drawer-img-wrapper {
+            width: 100%;
+            background: #000000;
+            border: 1px solid var(--border-light);
+            padding: 8px;
+            margin-bottom: 1.8rem;
+        }
+
+        .drawer-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .drawer-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-row {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1rem;
+        }
+
+        .detail-label {
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-val {
+            font-size: 0.85rem;
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        .btn-verify {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .btn-verify:hover {
+            border-color: var(--border-active);
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .cert-grid { grid-template-columns: 1fr; }
+            .drawer { max-width: 100%; padding: 1.5rem; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="halftone-overlay"></div>
+
+    <div class="container">
+        <a href="portfolio.html" class="nav-back">&larr; RETURN TO PORTFOLIO</a>
+
+        <header>
+            <div class="tag">VERIFIED CREDENTIALS // REPOSITORY</div>
+            <h1>CERTIFICATIONS INDEX</h1>
+            <p class="summary">
+                Verified technical certifications covering Artificial Intelligence, Transformer Architectures, Deep Learning for Natural Language Processing, and foundational Machine Learning systems[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span).
+            </p>
+        </header>
+
+        <div class="section-header">01 // ACADEMIC & INDUSTRY CERTIFICATIONS</div>
+
+        <!-- CERTIFICATE CARDS GRID -->
+        <div class="cert-grid">
+            
+            <!-- CS50 AI -->
+            <div class="cert-card" onclick="openDrawer('cs50-ai')">
+                <div class="cert-issuer">HARVARD UNIVERSITY</div>
+                <div class="cert-title">CS50's Introduction to Artificial Intelligence with Python</div>
+                <div class="cert-meta">
+                    <span>2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- CodeSignal: Exploring Transformer Architecture -->
+            <div class="cert-card" onclick="openDrawer('transformer-architecture')">
+                <div class="cert-issuer">CODESIGNAL</div>
+                <div class="cert-title">Exploring the Transformer Architecture</div>
+                <div class="cert-meta">
+                    <span>July 22, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- CodeSignal: Training & Inference -->
+            <div class="cert-card" onclick="openDrawer('transformer-inference')">
+                <div class="cert-issuer">CODESIGNAL</div>
+                <div class="cert-title">Bringing Transformers to Life: Training & Inference</div>
+                <div class="cert-meta">
+                    <span>July 09, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- CodeSignal: Deconstructing Transformers -->
+            <div class="cert-card" onclick="openDrawer('deconstructing-transformers')">
+                <div class="cert-issuer">CODESIGNAL</div>
+                <div class="cert-title">Deconstructing the Transformer Architecture</div>
+                <div class="cert-meta">
+                    <span>June 11, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- CodeSignal: Sequence Models -->
+            <div class="cert-card" onclick="openDrawer('sequence-models-attention')">
+                <div class="cert-issuer">CODESIGNAL</div>
+                <div class="cert-title">Sequence Models & The Dawn of Attention</div>
+                <div class="cert-meta">
+                    <span>May 27, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Google Cloud / Simplilearn -->
+            <div class="cert-card" onclick="openDrawer('transformer-bert')">
+                <div class="cert-issuer">GOOGLE CLOUD x SIMPLILEARN</div>
+                <div class="cert-title">Transformer Models and BERT Model</div>
+                <div class="cert-meta">
+                    <span>May 11, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Elements of AI -->
+            <div class="cert-card" onclick="openDrawer('elements-of-ai')">
+                <div class="cert-issuer">UNIVERSITY OF HELSINKI / MINNALEARN</div>
+                <div class="cert-title">Elements of AI</div>
+                <div class="cert-meta">
+                    <span>April 18, 2026</span>
+                    <span class="cert-action">INSPECT &rarr;</span>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            HASNAIN . AHMED &bull; CERTIFICATION REPOSITORY
+        </footer>
+    </div>
+
+    <!-- DRAWER OVERLAY -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+    <!-- SLIDE-OUT SIDE DRAWER -->
+    <div class="drawer" id="cert-drawer">
+        <button class="drawer-close" onclick="closeDrawer()">[ CLOSE X ]</button>
+        <div class="drawer-tag" id="d-issuer">ISSUER</div>
+        <div class="drawer-title" id="d-title">CERTIFICATE TITLE</div>
+
+        <div class="drawer-img-wrapper">
+            <img src="" alt="Certificate View" class="drawer-img" id="d-img">
+        </div>
+
+        <div class="drawer-details">
+            <div class="detail-row">
+                <div class="detail-label">COMPLETION DATE</div>
+                <div class="detail-val" id="d-date">--</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">CREDENTIAL CODE / ID</div>
+                <div class="detail-val" id="d-id">--</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">VERIFICATION STATUS</div>
+                <div class="detail-val" style="color: #4CAF50;">[ VERIFIED AUTHENTIC ]</div>
+            </div>
+        </div>
+
+        <a href="#" target="_blank" class="btn-verify" id="d-link">VERIFY ON OFFICIAL PORTAL &rarr;</a>
+    </div>
+
+    <!-- DRAWER JAVASCRIPT LOGIC -->
+    <script>
+        const certsData = {
+            "cs50-ai": {
+                title: "CS50's Introduction to Artificial Intelligence with Python",
+                issuer: "HARVARD UNIVERSITY",
+                date: "2026",
+                id: "6cdb88c7-ca19-4782-b7b4-b2e5691deee7",
+                image: "CS50AI .png",
+                verifyUrl: "https://cs50.harvard.edu/certificates/6cdb88c7-ca19-4782-b7b4-b2e5691deee7"
+            },
+            "transformer-architecture": {
+                title: "Exploring the Transformer Architecture",
+                issuer: "CODESIGNAL",
+                date: "July 22, 2026",
+                id: "cmp81fvt0002vl904z8troyua/course-paths/430",
+                image: "exploring.jpg",
+                verifyUrl: "https://codesignal.com/learn/certificates/cmp81fvt0002vl904z8troyua/course-paths/430"
+            },
+            "transformer-inference": {
+                title: "Bringing Transformers to Life: Training & Inference",
+                issuer: "CODESIGNAL",
+                date: "July 09, 2026",
+                id: "cmp81fvt0002vl904z8troyua/courses/1828",
+                image: "bringing.png",
+                verifyUrl: "https://codesignal.com/learn/certificates/cmp81fvt0002vl904z8troyua/courses/1828"
+            },
+            "deconstructing-transformers": {
+                title: "Deconstructing the Transformer Architecture",
+                issuer: "CODESIGNAL",
+                date: "June 11, 2026",
+                id: "cmp81fvt0002vl904z8troyua/courses/1827",
+                image: "deconstruct.jpg",
+                verifyUrl: "https://codesignal.com/learn/certificates/cmp81fvt0002vl904z8troyua/courses/1827"
+            },
+            "sequence-models-attention": {
+                title: "Sequence Models & The Dawn of Attention",
+                issuer: "CODESIGNAL",
+                date: "May 27, 2026",
+                id: "cmp81fvt0002vl904z8troyua/courses/1825",
+                image: "Sequence model.jpg",
+                verifyUrl: "https://codesignal.com/learn/certificates/cmp81fvt0002vl904z8troyua/courses/1825"
+            },
+            "transformer-bert": {
+                title: "Transformer Models and BERT Model",
+                issuer: "GOOGLE CLOUD x SIMPLILEARN",
+                date: "May 11, 2026",
+                id: "10214441",
+                image: "Google.jpg",
+                verifyUrl: "https://www.simplilearn.com/"
+            },
+            "elements-of-ai": {
+                title: "Elements of AI",
+                issuer: "UNIVERSITY OF HELSINKI / MINNALEARN",
+                date: "April 18, 2026",
+                id: "h07htjzyfjl",
+                image: "helnski.png",
+                verifyUrl: "https://certificates.mooc.fi/validate/h07htjzyfjl"
+            }
+        };
+
+        function openDrawer(key) {
+            const cert = certsData[key];
+            if (!cert) return;
+
+            document.getElementById('d-title').textContent = cert.title;
+            document.getElementById('d-issuer').textContent = cert.issuer;
+            document.getElementById('d-date').textContent = cert.date;
+            document.getElementById('d-id').textContent = cert.id;
+            document.getElementById('d-img').src = cert.image;
+            document.getElementById('d-link').href = cert.verifyUrl;
+
+            document.getElementById('drawer-overlay').classList.add('active');
+            document.getElementById('cert-drawer').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer-overlay').classList.remove('active');
+            document.getElementById('cert-drawer').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeDrawer();
+        });
+    </script>
+</body>
+</html>

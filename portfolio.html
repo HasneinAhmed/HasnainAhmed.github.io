@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASNAIN . AHMED // DATA SCIENTIST & ARCHITECT</title>
+    <style>
+        /* --- BRAND THEME & ROOT VARIABLES --- */
+        :root {
+            --bg-pitch: #050505;
+            --card-bg: rgba(14, 14, 16, 0.85);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --border-active: #ffffff;
+            --text-primary: #f1f1f1;
+            --text-secondary: #88888e;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-pitch);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            padding: 3rem 1.5rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* --- STIPPLE / NOISE OVERLAY EFFECT --- */
+        .halftone-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+            background-size: 4px 4px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            text-align: center;
+            padding: 4rem 1rem 3rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 4rem;
+        }
+
+        .logo-symbol {
+            display: inline-block;
+            font-size: 2rem;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            letter-spacing: 3px;
+        }
+
+        /* --- SECTION TITLES --- */
+        .section-header {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        /* --- GRID & CARDS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            border: 1px solid var(--border-light);
+            padding: 3px 8px;
+            color: var(--text-primary);
+        }
+
+        /* --- CREDENTIALS SINGLE CONTAINER --- */
+        .cert-container {
+            margin-bottom: 5rem;
+        }
+
+        .cert-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem 2rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-2px);
+        }
+
+        .cert-title {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .cert-issuer {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .cert-status {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            padding: 6px 14px;
+            white-space: nowrap;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 650px) {
+            h1 { font-size: 1.75rem; letter-spacing: 3px; }
+            .cert-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Grain / Halftone Texture Overlay -->
+    <div class="halftone-overlay"></div>
+
+    <div class="container">
+
+        <!-- HEADER SECTION -->
+        <header>
+            <div class="logo-symbol">
+                <img src="logo.png">
+            </div>
+            <h1 id="name-heading">HASNAIN . AHMED</h1>
+            <div class="subtitle">Data Scientist &bull; Decision Modeling</div>
+        </header>
+
+        <!-- PROJECTS SECTION -->
+        <div class="section-header">01 // ARTIFACTS & DEPLOYMENTS</div>
+        <div class="grid">
+
+            <!-- Project 1 (Updated & Linked) -->
+            <a href="project1.html" class="card-link">
+                <div class="card">
+                    <div class="card-tag">FRAMEWORK :: 01</div>
+                    <div class="card-title">PROJECT :: DECISION MODEL FRAMEWORK</div>
+                    <div class="card-desc">Custom decision modeling framework engineered and implemented from first principles in pure NumPy. Achieves 90–91% predictive output accuracy using custom mathematical evaluation routines, proprietary decision logic, and tailored methods—entirely free of high-level ML framework dependencies.</div>
+                    <div class="tech-tags">
+                        <span class="tag">Pure NumPy</span>
+                        <span class="tag">90-91% Accuracy</span>
+                        <span class="tag">Decision Modeling</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 2 -->
+             <a href="https://github.com/HasneinAhmed/CS50AI/tree/main" class="card-link">
+            <div class="card">
+                <div class="card-tag">SYSTEM SUITE :: 02</div>
+                <div class="card-title">PROJECT :: HARVARD-NEURAL-SUITE</div>
+                <div class="card-desc">A suite of twelve intelligent algorithm modules exploring probabilistic graph searches, neural classifiers, and reinforcement learning environments.</div>
+                <div class="tech-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Symbolic AI</span>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <!-- CERTIFICATIONS SECTION -->
+        <div class="section-header">02 // VERIFIED CREDENTIAL PROTOCOLS</div>
+        <div class="cert-container">
+
+            <!-- Single Credentials Card Link -->
+            <a href="certificate.html" class="card-link">
+                <div class="cert-card">
+                    <div>
+                        <div class="cert-title">CREDENTIALS :: VERIFIED ACADEMIC & INDUSTRY REPOSITORY</div>
+                        <div class="cert-issuer">HARVARD UNIVERSITY &bull; CODESIGNAL &bull; GOOGLE CLOUD &bull; UNIVERSITY OF HELSINKI</div>
+                    </div>
+                    <div class="cert-status">[ INSPECT ALL CREDENTIALS &rarr; ]</div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            HASNAIN . AHMED &bull; <span id="live-clock">00:00:00</span> UTC
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Subtle typewriter effect for main heading
+        const heading = document.getElementById("name-heading");
+        const fullText = "HASNAIN . AHMED";
+        let charIndex = 0;
+        
+        heading.innerHTML = "";
+
+        function typeEffect() {
+            if (charIndex < fullText.length) {
+                heading.innerHTML += fullText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 90);
+            }
+        }
+        window.addEventListener("DOMContentLoaded", typeEffect);
+
+        // Live Terminal Clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toUTCString().split(' ')[4];
+            document.getElementById('live-clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
+         
+
+            
+
+            <!-- Elements of AI -->
+        
+            </div>
+
+        </div>
+
+       
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Subtle typewriter effect for main heading
+        const heading = document.getElementById("name-heading");
+        const fullText = "HASNAIN . AHMED";
+        let charIndex = 0;
+        
+        heading.innerHTML = "";
+
+        function typeEffect() {
+            if (charIndex < fullText.length) {
+                heading.innerHTML += fullText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 90);
+            }
+        }
+        window.addEventListener("DOMContentLoaded", typeEffect);
+
+        // Live Terminal Clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toUTCString().split(' ')[4];
+            document.getElementById('live-clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT :: DECISION MODEL FRAMEWORK // HASNAIN . AHMED</title>
+    <style>
+        :root {
+            --bg-pitch: #050505;
+            --card-bg: rgba(14, 14, 16, 0.85);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --border-active: #ffffff;
+            --text-primary: #f1f1f1;
+            --text-secondary: #88888e;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-pitch);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            padding: 3rem 1.5rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .halftone-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+            background-size: 4px 4px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-back {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: 1px solid var(--border-light);
+            padding: 6px 14px;
+            margin-bottom: 3rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-back:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin: 3rem 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .spec-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.25rem;
+        }
+
+        .spec-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 0.4rem;
+        }
+
+        .spec-val {
+            font-size: 0.9rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .overview-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .overview-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .overview-box li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .overview-box li::before {
+            content: "//";
+            position: absolute;
+            left: 0;
+            color: var(--text-primary);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            border: 1px solid var(--border-light);
+            padding: 4px 10px;
+            color: var(--text-primary);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="halftone-overlay"></div>
+
+    <div class="container">
+        <a href="portfolio.html" class="nav-back">&larr; RETURN TO PORTFOLIO</a>
+
+        <header>
+            <div class="tag">FRAMEWORK ARCHITECTURE // DEPLOYMENT 01</div>
+            <h1>PROJECT :: DECISION MODEL FRAMEWORK</h1>
+            <p class="summary">
+                Custom decision modeling framework engineered and implemented from first principles in pure NumPy. Achieves 90–91% predictive output accuracy using custom mathematical evaluation routines, proprietary decision logic, and tailored methods—entirely free of high-level ML framework dependencies.
+            </p>
+        </header>
+
+        <div class="section-header">01 // TELEMETRY & PERFORMANCE</div>
+        <div class="spec-grid">
+            <div class="spec-card">
+                <div class="spec-label">PRIMARY ENGINE</div>
+                <div class="spec-val">Pure NumPy Vectorization</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">OUTPUT ACCURACY</div>
+                <div class="spec-val">90% – 91% Precision</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">CORE LOGIC</div>
+                <div class="spec-val">Custom Decision Model Framework</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">DEPENDENCY FOOTPRINT</div>
+                <div class="spec-val">Zero High-Level ML Libraries</div>
+            </div>
+        </div>
+
+        <div class="section-header">02 // ARCHITECTURAL HIGHLIGHTS</div>
+        <div class="overview-box">
+            <ul>
+                <li><strong style="color: #fff;">First-Principles Engineering:</strong> Developed completely ground-up in NumPy to maintain total control over evaluation math and execution logic.</li>
+                <li><strong style="color: #fff;">Zero Library Overhead:</strong> Operates independently without TensorFlow, PyTorch, or Scikit-learn, drastically reducing runtime weight and external dependencies.</li>
+                <li><strong style="color: #fff;">Verified Benchmark Output:</strong> Consistently produces 90–91% predictive output accuracy across internal evaluation benchmarks.</li>
+                <li><strong style="color: #fff;">Proprietary Evaluation Routines:</strong> Implements custom decision-scoring methods designed for high-precision modeling.</li>
+            </ul>
+        </div>
+
+        <div class="section-header">03 // CORE CAPABILITIES</div>
+        <div class="tech-tags">
+            <span class="badge">90-91% Output Accuracy</span>
+            <span class="badge">Pure NumPy Kernels</span>
+            <span class="badge">First-Principles Logic</span>
+            <span class="badge">Tailored Evaluation Methods</span>
+            <span class="badge">Zero Framework Dependencies</span>
+        </div>
+
+        <footer>
+            HASNAIN . AHMED &bull; DECISION MODEL FRAMEWORK SPECIFICATION
+        </footer>
+    </div>
+
+</body>
+</html>
